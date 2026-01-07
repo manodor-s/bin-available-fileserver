@@ -22,8 +22,7 @@ public class Client {
                         .GET()
                         .build();
 
-                HttpResponse<String> response =
-                        client.send(request, HttpResponse.BodyHandlers.ofString());
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
                 System.out.println("READ: " + response.body());
             } else {

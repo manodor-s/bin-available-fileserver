@@ -1,4 +1,4 @@
-package template.quarkus.node;
+package template.quarkus.server;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -52,5 +52,17 @@ public class NodeConfig {
 
     public void setEnabled() {
         log.info("Node {} is back", nodeId);
+    }
+
+    public String getNodeId() {
+        return nodeId;
+    }
+
+    public int getNodePort() {
+        return nodePort;
+    }
+
+    public List<String> getReplicas() {
+        return replicas;
     }
 }
