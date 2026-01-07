@@ -3,10 +3,10 @@ package template.quarkus.server.resource;
 import jakarta.inject.Inject;
 
 import template.quarkus.common.FileContent;
-import template.quarkus.common.SyncFileService;
+import template.quarkus.common.SyncFileRESTService;
 import template.quarkus.server.service.FileService;
 
-public class SyncFileServiceResource implements SyncFileService {
+public class SyncFileServiceResource implements SyncFileRESTService {
 
     @Inject
     private FileService fileService;
