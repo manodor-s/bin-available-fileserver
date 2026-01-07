@@ -39,6 +39,7 @@ public class NodeConfig {
 
     @PostConstruct
     public void configure() {
+        log.info("Start Node {}", nodeId);
         inContext(() -> {
             for (String replica : replicas) {
                 log.info("Create Sync REST Client for {}", replica);
