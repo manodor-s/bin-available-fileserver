@@ -63,7 +63,7 @@ public class NodeConfig {
 
     public void setDisabled(boolean die) {
         if (die) {
-            log.error("Node {} is dead", nodeId);
+            log.error("Node {} is DEAD! Shutting down...", nodeId);
             System.exit(1);
         } else {
             log.error("Node {} is down", nodeId);
