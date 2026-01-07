@@ -7,8 +7,8 @@ import jakarta.ws.rs.*;
 public interface ClientFileService {
 
     @POST
-    @Path("/{file}")
-    void write(@PathParam("file") String file, FileContent content);
+    @Path("/")
+    void write(UpdatePackage updatePackage);
 
     @GET
     @Path("/{file}")

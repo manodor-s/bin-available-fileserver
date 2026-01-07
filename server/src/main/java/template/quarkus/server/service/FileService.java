@@ -10,8 +10,8 @@ import jakarta.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import template.quarkus.common.FileContent;
 import template.quarkus.common.SyncFileService;
+import template.quarkus.common.UpdatePackage;
 
 @ApplicationScoped
 public class FileService {
@@ -32,13 +32,13 @@ public class FileService {
         syncFileServiceReplicas = syncFileServiceRegistry.getAllRegistered();
     }
 
-    public void store(String file, String content) {
-        storage.put(file, content);
+    public void store(UpdatePackage updatePackage) {
+        // TODO store
     }
 
-    public void writeThrough(String file, String content) {
-        storage.put(file, content);
-        syncFileServiceReplicas.parallelStream().forEach(fs -> fs.sync(file, new FileContent(content)));
+    public void writeThrough(UpdatePackage updatePackage) {
+        // TODO store
+        syncFileServiceReplicas.parallelStream().forEach(fs -> fs.sync(updatePackage));
     }
 
     public String read(String file) {
