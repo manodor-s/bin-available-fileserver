@@ -8,15 +8,16 @@ import jakarta.inject.Singleton;
 
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import template.quarkus.common.ChaosSyncFileService;
+import template.quarkus.common.SyncFileRESTService;
 import template.quarkus.common.SyncFileService;
 
 @Singleton
 public class SyncFileServiceRegistry {
 
     private static SyncFileService createFileService(String nodeId) {
-        SyncFileService syncFileService = RestClientBuilder.newBuilder()
+        SyncFileRESTService syncFileService = RestClientBuilder.newBuilder()
                 .baseUri(URI.create("http://" + nodeId + ":8080/api"))
-                .build(SyncFileService.class);
+                .build(SyncFileRESTService.class);
         return new ChaosSyncFileService(syncFileService);
     }
 
