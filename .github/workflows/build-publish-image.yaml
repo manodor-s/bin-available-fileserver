@@ -34,5 +34,5 @@ jobs:
           context: "."
           push: "true"
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            manodor-s/${{ env.IMAGE_NAME }}:latest
+            manodor-s/${{ env.IMAGE_NAME }}:${{ github.sha }}

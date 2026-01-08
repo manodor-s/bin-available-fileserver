@@ -1,6 +1,6 @@
 services:
   bin-available-fileserver-1:
-    image: 'ghcr.io/Manodor-S/bin-available-fileserver:latest'
+    image: 'ghcr.io/manodor-s/bin-available-fileserver:latest'
     container_name: node-1
     restart: unless-stopped
     depends_on:
@@ -16,7 +16,7 @@ services:
       - NODE_REPLICAS=node-2,node-3
 
   bin-available-fileserver-2:
-    image: 'ghcr.io/Manodor-S/bin-available-fileserver:latest'
+    image: 'ghcr.io/manodor-s/bin-available-fileserver:latest'
     container_name: node-2
     restart: unless-stopped
     depends_on:
@@ -32,7 +32,7 @@ services:
       - NODE_REPLICAS=node-1,node-3
 
   bin-available-fileserver-3:
-    image: 'ghcr.io/Manodor-S/bin-available-fileserver:latest'
+    image: 'ghcr.io/manodor-s/bin-available-fileserver:latest'
     container_name: node-3
     restart: unless-stopped
     depends_on:
