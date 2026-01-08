@@ -6,7 +6,7 @@ target/
 *.iml
 *.iws
 
-# Eclipse
+# Eclipsee
 .classpath
 .project
 .settings/
