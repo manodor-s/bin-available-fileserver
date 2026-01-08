@@ -12,16 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import template.quarkus.common.SyncFileService;
 import template.quarkus.common.UpdatePackage;
+import template.quarkus.common.FileStore;
 
 @ApplicationScoped
 public class FileService {
 
     private static final Logger log = LoggerFactory.getLogger(FileService.class);
 
-    private final Map<String, String> storage = new ConcurrentHashMap<>();
-
     @Inject
     private SyncFileServiceRegistry syncFileServiceRegistry;
+
+    @Inject
+    private FileStore filestore;
 
     private Collection<SyncFileService> syncFileServiceReplicas;
 
@@ -32,16 +34,28 @@ public class FileService {
         syncFileServiceReplicas = syncFileServiceRegistry.getAllRegistered();
     }
 
-    public void store(UpdatePackage updatePackage) {
-        // TODO store
+    //Funktion für vom main Server zu Replikas
+    public int store(UpdatePackage updatePackage) {
+        return filestore.updateFileStore(updatePackage);
     }
 
-    public void writeThrough(UpdatePackage updatePackage) {
-        // TODO store
-        syncFileServiceReplicas.parallelStream().forEach(fs -> fs.sync(updatePackage));
+    //Funktion die vom Client aufgerufen wird
+    public int writeThrough(UpdatePackage updatePackage) {
+        int localStatusCode = store(updatePackage);
+        if(localStatusCode > 0) return localStatusCode;
+        syncFileServiceReplicas.parallelStream().forEach(fs -> {
+            UpdatePackage nodePackage = updatePackage;
+            int returnStatusCode;
+            do{
+                returnStatusCode = fs.sync(nodePackage);
+                if(returnStatusCode > 0)nodePackage = new UpdatePackage(filestore.getLatestVersion(),returnStatusCode,filestore.getFilesChangedAfterVersion(returnStatusCode));
+                else if(returnStatusCode == -1)log.error("Nachricht an "+fs.toString()+" ist gefailed");;
+            } while (returnStatusCode != 0);
+        });
+        return 0;
     }
 
-    public String read(String file) {
-        return storage.get(file);
+    public byte[] read(String file) {
+        return filestore.getFileEntry(file).getData();
     }
 }

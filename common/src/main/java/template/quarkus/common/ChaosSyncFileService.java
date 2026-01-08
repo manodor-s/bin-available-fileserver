@@ -16,12 +16,13 @@ public class ChaosSyncFileService implements SyncFileService {
     }
 
     @Override
-    public void sync(UpdatePackage updatePackage) {
+    public int sync(UpdatePackage updatePackage) {
         double v = ThreadLocalRandom.current().nextDouble();
         if (v < 0.9) {
-            syncFileService.sync(updatePackage);
+            return syncFileService.sync(updatePackage);
         } else {
             log.error("Failed to sync... < 90%");
+            return -1;
         }
     }
 }

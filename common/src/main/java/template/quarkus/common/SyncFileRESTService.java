@@ -10,5 +10,5 @@ public interface SyncFileRESTService extends SyncFileService {
     @Override
     @POST
     @Path("/")
-    void sync(UpdatePackage updatePackage);
+    int sync(UpdatePackage updatePackage);
 }

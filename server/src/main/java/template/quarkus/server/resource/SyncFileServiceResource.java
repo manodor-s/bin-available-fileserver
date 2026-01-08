@@ -14,7 +14,7 @@ public class SyncFileServiceResource implements SyncFileRESTService {
     public SyncFileServiceResource() {}
 
     @Override
-    public void sync(UpdatePackage updatePackage) {
-        fileService.store(updatePackage);
+    public int sync(UpdatePackage updatePackage) {
+        return fileService.store(updatePackage);
     }
 }

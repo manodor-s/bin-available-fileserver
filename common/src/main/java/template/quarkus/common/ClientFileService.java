@@ -12,5 +12,5 @@ public interface ClientFileService {
 
     @GET
     @Path("/{file}")
-    FileContent read(@PathParam("file") String file);
+    byte[] read(@PathParam("file") String file);
 }

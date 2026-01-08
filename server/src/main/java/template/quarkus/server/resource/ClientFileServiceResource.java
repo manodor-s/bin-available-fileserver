@@ -20,7 +20,7 @@ public class ClientFileServiceResource implements ClientFileService {
     }
 
     @Override
-    public FileContent read(String file) {
-        return new FileContent(fileService.read(file));
+    public byte[] read(String file) {
+        return fileService.read(file);
     }
 }
