@@ -8,7 +8,7 @@ public interface ClientFileService {
 
     @POST
     @Path("/")
-    int write(UpdatePackage updatePackage);
+    int write(String name, byte[] file);
 
     @GET
     @Path("/{file}")
